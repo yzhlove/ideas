@@ -9,23 +9,39 @@ import (
 
 func main() {
 
-	nc, err := nats.Connect("nats://localhost:4333")
+	go subscribe()
+	publish()
+
+	time.Sleep(time.Second * 5)
+}
+
+func tryCatch(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func publish() {
+	nc, err := nats.Connect("127.0.0.1:4333")
+	tryCatch(err)
 	defer nc.Close()
 
-	if err := nc.Publish("foo", []byte("the first message!")); err != nil {
-		log.Fatal(err)
+	tryCatch(nc.Publish("test1", []byte("this is first message!")))
+
+}
+
+func subscribe() {
+
+	nc, err := nats.Connect("127.0.0.1:4333")
+	tryCatch(err)
+	defer nc.Close()
+
+	for {
+		sb, err := nc.Subscribe("test1", func(msg *nats.Msg) {
+			fmt.Println("receive message: ", string(msg.Data))
+		})
+		tryCatch(err)
+		sb = sb
+		time.Sleep(time.Second)
 	}
-
-	time.Sleep(time.Second)
-	sb, err := nc.Subscribe("foo", func(msg *nats.Msg) {
-		fmt.Printf("receive message -> %s \n", msg.Data)
-	})
-
-	fmt.Println(sb.Type())
-
-	time.Sleep(time.Second)
-
 }
