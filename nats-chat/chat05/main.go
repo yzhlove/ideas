@@ -4,15 +4,16 @@ import (
 	"fmt"
 	"github.com/nats-io/nats.go"
 	"log"
-	"sync"
 	"time"
 )
 
 func main() {
 
-	// 多个客户端同时获取
-
-	go subscribe()
+	go func() {
+		for i := 0; i < 10; i++ {
+			go subscribe()
+		}
+	}()
 
 	nc, err := nats.Connect("nats://127.0.0.1:4333")
 	if err != nil {
@@ -20,11 +21,11 @@ func main() {
 	}
 	defer nc.Close()
 
-	time.Sleep(time.Millisecond * 10)
+	time.Sleep(time.Millisecond * 100)
 
-	nc.Publish("hello", []byte("what are you doing ?"))
+	nc.Publish("hello", []byte("what are you doing ..."))
 
-	time.Sleep(time.Second)
+	time.Sleep(time.Second * 2)
 }
 
 func subscribe() {
@@ -35,20 +36,13 @@ func subscribe() {
 	}
 	defer nc.Close()
 
-	var wg sync.WaitGroup
-	wg.Add(1)
+	ch := make(chan struct{})
 
 	nc.Subscribe("hello", func(msg *nats.Msg) {
-		defer wg.Done()
-
-		fmt.Println("1111")
-
-		fmt.Println("msg ---> ", string(msg.Data))
+		defer func() {
+			ch <- struct{}{}
+		}()
+		fmt.Println("---------> ", string(msg.Data))
 	})
-
-	fmt.Println("2222")
-
-	wg.Wait()
-
-	fmt.Println("3333")
+	<-ch
 }
