@@ -41,14 +41,11 @@ func subscribe1() {
 	stop := make(chan struct{})
 
 	nc.Subscribe("hello", func(msg *nats.Msg) {
-		defer func() {
-			stop <- struct{}{}
-		}()
-
 		fmt.Println("msg --> ", string(msg.Data))
-
-		nc.Publish(msg.Reply, []byte("瞅你咋滴！"))
-		//msg.Respond([]byte("瞅你咋滴！"))
+		if err := nc.Publish(msg.Reply, []byte("瞅你咋滴！")); err != nil {
+			log.Fatal(err)
+		}
+		//msg.Respond([]byte("瞅你咋滴！")) 同上
 	})
 
 	<-stop
