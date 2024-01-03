@@ -5,6 +5,7 @@ go 1.21.5
 require (
 	fyne.io/fyne/v2 v2.4.3
 	github.com/sergi/go-diff v1.3.1
+	github.com/webview/webview_go v0.0.0-20230901181450-5a14030a9070
 )
 
 require (
