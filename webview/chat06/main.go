@@ -1,16 +1,24 @@
 package main
 
 import (
+	"fmt"
 	webview "github.com/webview/webview_go"
+	"time"
 )
 
-func main() {
-	w := webview.New(false)
-	defer w.Destroy()
-	w.SetTitle("Basic Example")
-	w.SetSize(1920, 1080, webview.HintNone)
+var View webview.WebView
 
-	//u := "file:///Users/yostar/index/Language/LanguageCommon.zh_CN.csv.html"
-	w.Navigate("file:////Users/yostar/index/Language/LanguageCommon.zh_CN.csv.html")
-	w.Run()
+func main() {
+	View = webview.New(false)
+	defer View.Destroy()
+	View.SetTitle("Basic Example")
+	View.SetSize(1, 1, webview.HintNone)
+	go func() {
+		time.Sleep(time.Second * 5)
+		fmt.Println("dsjfasdb")
+		View.SetSize(1280, 720, webview.HintNone)
+		View.Navigate("file:///Users/yostar/Desktop/rm.txt")
+	}()
+	View.SetHtml("what are you doing?")
+	View.Run()
 }
