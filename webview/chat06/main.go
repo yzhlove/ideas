@@ -1,24 +1,31 @@
 package main
 
 import (
-	"fmt"
 	webview "github.com/webview/webview_go"
-	"time"
+	"io"
+	"os"
 )
 
 var View webview.WebView
 
 func main() {
-	View = webview.New(false)
+	View = webview.New(true)
 	defer View.Destroy()
 	View.SetTitle("Basic Example")
-	View.SetSize(1, 1, webview.HintNone)
-	go func() {
-		time.Sleep(time.Second * 5)
-		fmt.Println("dsjfasdb")
-		View.SetSize(1280, 720, webview.HintNone)
-		View.Navigate("file:///Users/yostar/Desktop/rm.txt")
-	}()
-	View.SetHtml("what are you doing?")
+	View.SetSize(1024, 768, webview.HintNone)
+
+	file, err := os.Open("/Users/yostar/Desktop/xxx.html")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	bytes, err := io.ReadAll(file)
+	if err != nil {
+		panic(err)
+	}
+
+	//View.Navigate("data:text/html;base64," + base64.StdEncoding.EncodeToString(bytes))
+	View.SetHtml(string(bytes))
 	View.Run()
 }

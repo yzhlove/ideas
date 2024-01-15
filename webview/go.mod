@@ -4,6 +4,7 @@ go 1.21.5
 
 require (
 	fyne.io/fyne/v2 v2.4.3
+	github.com/jchv/go-webview2 v0.0.0-20221223143126-dc24628cff85
 	github.com/sergi/go-diff v1.3.1
 	github.com/webview/webview_go v0.0.0-20230901181450-5a14030a9070
 	github.com/zserge/lorca v0.1.10
@@ -23,6 +24,7 @@ require (
 	github.com/go-text/typesetting v0.0.0-20230616162802-9c17dd34aa4a // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gopherjs/gopherjs v1.17.2 // indirect
+	github.com/jchv/go-winloader v0.0.0-20200815041850-dec1ee9a7fd5 // indirect
 	github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect
