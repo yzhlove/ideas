@@ -1,0 +1,18 @@
+GeneratedFilenamePrefix: test
+ImportPath: "./"
+Ident: "\"./\"".File_test_proto
+PackageName: proto
+GoIdent -->  "\"./\"".Req
+field.Comments.Leading.String() =>  
+LeadingDetached ==> 
+field.Comments.Trailing.String() =>  
+field.Comments.Leading.String() =>  
+LeadingDetached ==> 
+field.Comments.Trailing.String() =>  
+GoIdent -->  "\"./\"".Resp
+field.Comments.Leading.String() =>  
+LeadingDetached ==> 
+field.Comments.Trailing.String() =>  
+field.Comments.Leading.String() =>  
+LeadingDetached ==> 
+field.Comments.Trailing.String() =>  

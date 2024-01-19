@@ -1,0 +1,17 @@
+syntax="proto3";
+
+option go_package="./;proto";
+
+service Hello {
+  rpc Echo(Req) returns (Resp);
+}
+
+message Req {
+  string Name = 1;
+  int64 Token = 2;
+}
+
+message Resp {
+  string Content = 1;
+  int64  Timestamp = 2;
+}
