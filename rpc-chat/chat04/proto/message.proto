@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "proto";
+
+message Msg1 {
+  string Name = 1;
+  uint32 Age = 2;
+  bool Sex = 3;
+  string Desc = 4;
+  string Project = 5;
+  uint32 Job = 6;
+}
+
+message Msg2 {
+  string Name = 1;
+  uint32 Age = 2;
+  bool Sex = 3;
+  uint32 Job = 6;
+}
