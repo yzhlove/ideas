@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "proto";
+
+service Hello {
+  rpc Echo(Req) returns (Resp);
+  rpc EchoPipeline(stream Req) returns (stream Resp);
+}
+
+
+message Req {
+  string Sender = 1;
+  string Content = 2;
+  uint32 Id = 3;
+  uint64 Time = 4;
+}
+
+message Resp {
+  string Sender = 1;
+  string Content = 2;
+  uint32 Id = 3;
+  uint64 Time = 4;
+  repeated Attribute Attr = 5;
+}
+
+enum MsgType {
+  None = 0;
+  System = 1;
+  Stand = 2;
+}
+
+message Attribute {
+  string Desc = 1;
+  MsgType Type = 2;
+  bytes Extra = 3;
+}

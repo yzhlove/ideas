@@ -1,25 +1,24 @@
 package main
 
 import (
-	"fmt"
-	"github.com/sergi/go-diff/diffmatchpatch"
-	"os"
+	"net/url"
+	"time"
+
+	"github.com/zserge/lorca"
 )
 
 func main() {
-
-	bytes1, err := os.ReadFile("/Users/yurisa/Desktop/MockSave/DataServer/WorldMapList.csv")
+	// Create UI with basic HTML passed via data URI
+	ui, err := lorca.New("data:text/html,"+url.PathEscape(`
+	<html>
+		<head><title>Hello</title></head>
+		<body><h1>Hello, world!</h1></body>
+	</html>
+	`), "", 480, 320)
 	if err != nil {
-		panic(err)
 	}
-
-	bytes2, err := os.ReadFile("/Users/yurisa/Desktop/MockSave/TempServers/WorldMapList.csv")
-	if err != nil {
-		panic(err)
-	}
-
-	df := diffmatchpatch.New()
-	//r := df.DiffMain(string(bytes1), string(bytes2), false)
-	r := df.DiffMainRunes([]rune(string(bytes1)), []rune(string(bytes2)), false)
-	fmt.Println(df.DiffPrettyText(r))
+	defer ui.Close()
+	// Wait until UI window is closed
+	<-ui.Done()
+	time.Sleep(time.Second * 10)
 }

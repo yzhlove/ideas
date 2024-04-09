@@ -2,15 +2,30 @@ package main
 
 import (
 	webview "github.com/webview/webview_go"
+	"io"
+	"os"
 )
 
-func main() {
-	w := webview.New(true)
-	defer w.Destroy()
-	w.SetTitle("Basic Example")
-	w.SetSize(1920, 1080, webview.HintNone)
+var View webview.WebView
 
-	//u := "file:///Users/yostar/index/Language/LanguageCommon.zh_CN.csv.html"
-	w.Navigate("file:///Users/yostar/index/Language/LanguageCommon.zh_CN.csv.html")
-	w.Run()
+func main() {
+	View = webview.New(true)
+	defer View.Destroy()
+	View.SetTitle("Basic Example")
+	View.SetSize(1024, 768, webview.HintNone)
+
+	file, err := os.Open("/Users/yostar/Desktop/xxx.html")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	bytes, err := io.ReadAll(file)
+	if err != nil {
+		panic(err)
+	}
+
+	//View.Navigate("data:text/html;base64," + base64.StdEncoding.EncodeToString(bytes))
+	View.SetHtml(string(bytes))
+	View.Run()
 }
