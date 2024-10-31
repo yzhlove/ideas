@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8"/>
+    <title>测试</title>
+
+</head>
+
+<body>
+<button id="increment">Tap me</button>
+<div>You tapped <span id="count">0</span> time(s).</div>
+
+<script>
+    const [incrementElement, countElement] =
+        document.querySelectorAll("#increment, #count");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        incrementElement.addEventListener("click", () => {
+            window.increment().then(result => {
+                countElement.textContent = result.count;
+            });
+        });
+    });
+</script>
+</body>
+</html>
