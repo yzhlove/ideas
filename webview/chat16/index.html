@@ -1002,7 +1002,7 @@
                 return
             }
 
-            requestCheckCaptchaData({'dots': dotsA.join(','), 'key': captchaKey})
+            requestCheckCaptchaData(JSON.stringify({'dots': dotsA.join(','), 'key': captchaKey}))
         }
 
         function isJSONString(str) {
@@ -1035,7 +1035,6 @@
                 } else {
                     var parse = JSON.parse(result.data)
                     if (parse['code'] === 0) {
-                        console.log("parse ----> ", parse)
                         captchaImageDom.classList.remove(hiddenClassName)
                         captchaThumbDom.classList.remove(hiddenClassName)
                         captchaImageDom.setAttribute("src", parse['image_base64'])
@@ -1050,7 +1049,7 @@
 
         function requestCheckCaptchaData(dots) {
 
-            window.checkCaptDataApi(dots).then(result => {
+            window.checkCaptchaDataApi(dots).then(result => {
                 if (!isJSONString(result.data)) {
                     captchaBtnControlDom.classList.remove(activeDefaultClassName)
                     captchaBtnControlDom.classList.remove(activeOverClassName)
@@ -1083,7 +1082,7 @@
         __initialize()
         return {}
     });
-    
+
     window.addEventListener("DOMContentLoaded", Captcha())
 
 </script>

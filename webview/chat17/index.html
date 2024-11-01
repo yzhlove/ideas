@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8"/>
+    <title>测试</title>
+
+</head>
+
+<body>
+<button id="increment1">Tap me</button>
+<button id="increment2">Tap me 2</button>
+<div>You tapped <span id="count">0</span> time(s).</div>
+
+<script>
+
+    const [incrementElement1,incrementElement2 ,countElement] =
+        document.querySelectorAll("#increment1,#increment2, #count");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        incrementElement1.addEventListener("click", () => {
+            window.increment1().then(result => {
+                countElement.textContent = result.count;
+            });
+        });
+        incrementElement2.addEventListener("click", () => {
+            window.increment2().then(result => {
+                countElement.textContent = result.count;
+            });
+        });
+    });
+</script>
+</body>
+</html>
