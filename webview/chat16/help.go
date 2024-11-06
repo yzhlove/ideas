@@ -14,7 +14,7 @@ const (
 	httpTimestamp = "tm"
 	httpNonce     = "nonce"
 	httpSign      = "sign"
-	httpSecret    = "*#06#*="
+	httpSecret    = "*#06#*"
 )
 
 var (

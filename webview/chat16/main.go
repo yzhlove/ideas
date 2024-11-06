@@ -104,8 +104,6 @@ func getReportCaptchaDataApi() string {
 	}
 	defer resp.Body.Close()
 
-	wLog(fmt.Sprintf("[getReportCaptchaDataApi] values ==> %s ", string(dat)))
-
 	type T struct {
 		Success bool           `json:"Success"`
 		Result  map[string]any `json:"Result"`
@@ -117,10 +115,11 @@ func getReportCaptchaDataApi() string {
 	}
 
 	if xt.Result != nil {
-		xt.Result["code"] = 0
+		xt.Result["code"] = 1
 	}
 
 	xxx, _ := json.Marshal(xt.Result)
+	wLog(fmt.Sprintf("[getReportCaptchaDataApi] values ==> %s ", string(xxx)))
 	return string(xxx)
 }
 
@@ -195,7 +194,7 @@ func checkReportCaptchaDataApi(data string) string {
 	}
 
 	if xt.Success {
-		xt.Result["code"] = 0
+		xt.Result["code"] = 1
 	}
 	xxx, _ := json.Marshal(xt.Result)
 	return string(xxx)
