@@ -7,7 +7,7 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/jchv/go-webview2 v0.0.0-20221223143126-dc24628cff85
 	github.com/sergi/go-diff v1.3.1
-	github.com/webview/webview_go v0.0.0-20230901181450-5a14030a9070
+	github.com/webview/webview_go v0.0.0-20240831120633-6173450d4dd6
 	github.com/zserge/lorca v0.1.10
 )
 
