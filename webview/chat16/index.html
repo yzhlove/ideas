@@ -1034,7 +1034,7 @@
                     console.log("请求验证码数据失败：" + result.data);
                 } else {
                     var parse = JSON.parse(result.data)
-                    if (parse['code'] === 0) {
+                    if (parse['code'] === 1) {
                         captchaImageDom.classList.remove(hiddenClassName)
                         captchaThumbDom.classList.remove(hiddenClassName)
                         captchaImageDom.setAttribute("src", parse['image_base64'])
@@ -1061,7 +1061,7 @@
                     captchaBtnControlDom.classList.remove(activeOverClassName)
                     var data = JSON.parse(result.data)
 
-                    if (data['code'] === 0) {
+                    if (data['code'] === 1) {
                         alert("验证成功")
                         captchaBtnControlDom.classList.remove(activeErrorClassName)
                         captchaBtnControlDom.classList.add(activeSuccessClassName)
