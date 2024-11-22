@@ -10,7 +10,7 @@ func main() {
 	w := webview.New(false)
 	defer w.Destroy()
 	w.SetTitle("Bind Example")
-	w.SetSize(800, 600, webview.HintNone)
+	w.SetSize(352, 400, webview.HintNone)
 
 	data, err := os.ReadFile("/Users/yostar/Develop/Go/GoPath/src/rain.com/ideas/webview/chat14/index.html")
 	if err != nil {
